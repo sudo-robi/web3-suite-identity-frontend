@@ -22,7 +22,7 @@ export function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen flex">
       {/* Sidebar */}
-      <aside className="w-64 bg-surface border-r border-gray-800 p-4 flex flex-col">
+      <aside className="w-64 bg-surface border-r border-gray-800 p-4 flex flex-col hidden lg:flex">
         <div className="mb-8">
           <h1 className="text-xl font-bold text-stellar-500">Web3 Identity</h1>
           <p className="text-xs text-gray-500">Stellar Suite</p>

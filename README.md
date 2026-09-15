@@ -4,16 +4,31 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Stellar](https://img.shields.io/badge/Stellar-Ready-08B5E5?style=for-the-badge&logo=stellar&logoColor=white)](https://stellar.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Freighter](https://img.shields.io/badge/Wallet-Freighter-14b8e6?style=for-the-badge)](https://freighter.app)
 
 # Web3 Suite — Identity Frontend
 
 A modern React application for managing decentralized identity on the Stellar network. This frontend provides an intuitive interface for DID management, verifiable credential wallets, and KYC verification — all powered by Soroban smart contracts.
 
-<!-- Screenshot placeholders -->
-![Dashboard](https://via.placeholder.com/800x450/0a0a0a/14b8e6?text=Dashboard+Screenshot)
-![DID Management](https://via.placeholder.com/800x450/0a0a0a/14b8e6?text=DID+Management+Screenshot)
-![Credential Wallet](https://via.placeholder.com/800x450/0a0a0a/14b8e6?text=Credential+Wallet+Screenshot)
-![KYC Verification](https://via.placeholder.com/800x450/0a0a0a/14b8e6?text=KYC+Verification+Screenshot)
+---
+
+## Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Architecture](#architecture)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Environment Variables](#environment-variables)
+  - [Development](#development)
+- [Project Structure](#project-structure)
+- [Wallet Integration](#wallet-integration)
+- [Pages](#pages)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
 
 ## Features
 
@@ -43,19 +58,25 @@ A modern React application for managing decentralized identity on the Stellar ne
 - View current KYC status and expiry
 - Admin panel for verifiers
 
+---
+
 ## Tech Stack
 
 | Technology | Purpose |
 |------------|---------|
 | React 18 | UI framework |
-| TypeScript | Type safety |
+| TypeScript 5.3 | Type safety |
 | Vite 5 | Build tool & dev server |
 | Tailwind CSS 3 | Styling |
 | React Router 6 | Navigation |
-| Stellar SDK | Blockchain interaction |
-| Freighter API | Wallet connection |
+| Stellar SDK 12 | Blockchain interaction |
+| Freighter API 10 | Wallet connection |
 | Axios | HTTP client |
 | Lucide React | Icons |
+| clsx | Classname utility |
+| date-fns | Date formatting |
+
+---
 
 ## Architecture
 
@@ -70,9 +91,10 @@ A modern React application for managing decentralized identity on the Stellar ne
 │  │  │   Pages     │  │  Components  │  │      Hooks          │  │  │
 │  │  │             │  │              │  │                     │  │  │
 │  │  │ Dashboard   │  │ Layout       │  │ useWallet           │  │  │
-│  │  │ DID Mgmt    │  │ Card         │  │ useDID              │  │  │
-│  │  │ Credentials │  │ Button       │  │ useCredentials      │  │  │
-│  │  │ KYC         │  │ StatusBadge  │  │ useKYC              │  │  │
+│  │  │ DID Mgmt    │  │ Card         │  │                     │  │  │
+│  │  │ Credentials │  │ Button       │  │                     │  │  │
+│  │  │ KYC         │  │ StatusBadge  │  │                     │  │  │
+│  │  │ NotFound    │  │ Loading      │  │                     │  │  │
 │  │  └──────┬──────┘  └─────────────┘  └──────────┬──────────┘  │  │
 │  │         │                                       │             │  │
 │  │         └───────────────┬───────────────────────┘             │  │
@@ -81,7 +103,7 @@ A modern React application for managing decentralized identity on the Stellar ne
 │  │  │                    Services                              │  │  │
 │  │  │                                                          │  │  │
 │  │  │  api.ts  │  did.service.ts  │  credential.service.ts    │  │  │
-│  │  │          │  kyc.service.ts   │  wallet.service.ts        │  │  │
+│  │  │          │  kyc.service.ts   │                           │  │  │
 │  │  └──────────────────────┬──────────────────────────────────┘  │  │
 │  │                         │                                     │  │
 │  └─────────────────────────┼─────────────────────────────────────┘  │
@@ -101,6 +123,8 @@ A modern React application for managing decentralized identity on the Stellar ne
                     │   Wallet)       │
                     └─────────────────┘
 ```
+
+---
 
 ## Getting Started
 
@@ -146,6 +170,8 @@ npm run lint         # Run ESLint
 npm test             # Run tests
 ```
 
+---
+
 ## Project Structure
 
 ```
@@ -181,10 +207,15 @@ web3-suite-identity-frontend/
 │       └── index.ts             # TypeScript types
 ├── index.html
 ├── tailwind.config.js
+├── postcss.config.js
 ├── vite.config.ts
+├── tsconfig.json
+├── tsconfig.node.json
 ├── package.json
 └── README.md
 ```
+
+---
 
 ## Wallet Integration
 
@@ -210,9 +241,31 @@ const signedTx = await Freighter.signTransaction(txXDR, {
 });
 ```
 
+---
+
+## Pages
+
+| Page | Route | Description |
+|------|-------|-------------|
+| Dashboard | `/` | Overview with stats, activity, and quick actions |
+| DID Management | `/did` | Create, view, update, deactivate, and transfer DIDs |
+| Credential Wallet | `/credentials` | Issue, view, verify, and revoke credentials |
+| KYC Verification | `/kyc` | Submit KYC applications and track status |
+| Not Found | `*` | 404 catch-all page |
+
+---
+
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to this project.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feat/my-feature`)
+3. Commit your changes (`git commit -am 'Add my feature'`)
+4. Push to the branch (`git push origin feat/my-feature`)
+5. Open a Pull Request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+
+---
 
 ## License
 
